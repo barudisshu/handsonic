@@ -20,6 +20,7 @@ import javax.sql.DataSource;
 @AutoConfigureAfter(Config.class)
 @MapperScan("com.galudisu.handsonic.**.mapper")
 public class MyBatisConfig {
+
     @Autowired
     DataSource dataSource;
 

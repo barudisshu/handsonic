@@ -28,7 +28,7 @@
 
         <!-- 后台线程 -->
         <logger name="com.galudisu.handsonic" level="DEBUG" additivity="false">
-            <!--<AppenderRef ref="SYS"/>-->
+            <AppenderRef ref="SYS"/>
             <AppenderRef ref="Console"/>
         </logger>
 
