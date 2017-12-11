@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="off" monitorInterval="1800">
+    <properties>
+        <property name="Pattern_Layout">%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line] - %msg%n</property>
+        <property name="Triggering_Policy_Size">100M</property>
+        <Property name="LOG_PATH">logs</Property>
+    </properties>
+
+    <appenders>
+        <!-- 控制台输出 -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${Pattern_Layout}"/>
+        </Console>
+
+        <!-- 后台定时任务 -->
+        <RollingRandomAccessFile name="SYS" fileName="${LOG_PATH}/sys.log" filePattern="${LOG_PATH}/task.%d{yyyy-MM-dd-HH}.log">
+            <PatternLayout pattern="${Pattern_Layout}"/>
+            <SizeBasedTriggeringPolicy size="${Triggering_Policy_Size}"/>
+        </RollingRandomAccessFile>
+    </appenders>
+
+    <loggers>
+        <logger name="org.springframework" level="WARN"/>
+        <logger name="org.hibernate" level="WARN"/>
+        <logger name="com.baomidou.mybatisplus" level="DEBUG"/>
+        <logger name="org.apache.ibatis" level="DEBUG"/>
+        <logger name="org.apache.shiro" level="DEBUG"/>
+
+        <!-- 后台线程 -->
+        <logger name="com.galudisu.handsonic" level="DEBUG" additivity="false">
+            <!--<AppenderRef ref="SYS"/>-->
+            <AppenderRef ref="Console"/>
+        </logger>
+
+        <Root level="DEBUG">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </loggers>
+</configuration>
